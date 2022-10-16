@@ -9,3 +9,5 @@ _site
 Gemfile.lock
 vendor
 
+# old posts and files
+__arh/*

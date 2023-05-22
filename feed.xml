@@ -1,1 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://www.bowenwen.com/feed.xml" rel="self" type="application/atom+xml"/><link href="https://www.bowenwen.com/" rel="alternate" type="text/html" hreflang="en"/><updated>2023-05-22T19:12:09+00:00</updated><id>https://www.bowenwen.com/feed.xml</id><title type="html">Bo Wen</title><subtitle>My journey into data science, advanced computing, and more. </subtitle><entry><title type="html">Wardrop’s Principles</title><link href="https://www.bowenwen.com/blog/2019/wardrop/" rel="alternate" type="text/html" title="Wardrop’s Principles"/><published>2019-06-01T00:00:00+00:00</published><updated>2019-06-01T00:00:00+00:00</updated><id>https://www.bowenwen.com/blog/2019/wardrop</id><content type="html" xml:base="https://www.bowenwen.com/blog/2019/wardrop/"><![CDATA[<p>Wardrop’s first and second principles, named after English mathematician John Glen Wardrop <sup id="fnref:wardrop" role="doc-noteref"><a href="#fn:wardrop" class="footnote" rel="footnote">1</a></sup>, are pivotal to the understanding of user behavior in transportation systems. Wardrop’s principles enable the systematic analysis of transportation networks. It does this by elegantly linking road performance to system objectives.</p> <p>In the middle of the 20th century, transportation engineers and planners knew that an increased number of cars result in increased congestion–reduced speed and capacity. They were able to use accurate empirical relationships to model congestion thanks to BD Greenshield <sup id="fnref:greenshield" role="doc-noteref"><a href="#fn:greenshield" class="footnote" rel="footnote">2</a></sup>. They knew that given different route options, people would choose the one that took less time. But there was still an important piece of the puzzle missing. Wardrop formulated the math to quantitatively model route choice behavior.</p> <p>Under Wardrop’s first principle, users make choices to minimize travel times. This is also referred to as a “user equilibrium” condition. In the example network below, people living in the red and blue neighborhoods, at home location ‘o’, are travelling to work location ‘d’. Under user equilibrium, every user would choose the road with the lowest travel time, even if it resulted in congestion and increased travel time for everyone else.</p> <figure> <img src="/assets/img/posts/wardrop-ue.svg" alt="user equilibrium condition" width="100%"/> <figcaption><b>Figure 1</b> User equilibrium–everyone uses the wide road, causing congestion.</figcaption> </figure> <p>In contrast, under Wardrop’s second principle, all users make decision to minimize the total network travel time, a “system optimal” condition. In this case, users would avoid congestion even if it results in higher travel time for themselves.</p> <figure> <img src="/assets/img/posts/wardrop-so.svg" alt="system optimal condition" width="100%"/> <figcaption><b>Figure 2</b> System optimal–most people use the wide road, but a small number of people travel longer on small streets to avoid causing congestion on the wide road.</figcaption> </figure> <p>We will skip the calculations in this blog post, but the concept of Wardrop’s principles is very intuitive and has a wide range of application beyond transportation. In fact, the mathematical framework behind user equilibrium, i.e. Nash Equilibrium (or in other contexts, the tragedy of the commons), is deeply rooted in game theory.</p> <p>While in transportation planning we generally assume a user equilibrium network condition, we often experiment with different measures (such as road advisories, congestion charges, ramp metering, tolls) to encourage users to act in a manner that reduces congestion. Sometimes, these measures can be very political and wildly unpopular.</p> <div class="footnotes" role="doc-endnotes"> <ol> <li id="fn:wardrop" role="doc-endnote"> <p>Research by JG Wardrop on <a href="https://scholar.google.ca/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=JG+Wardrop&amp;btnG=&amp;oq=" target="_blank">Google Scholar</a>, and more on JG Wardrop on <a href="https://en.wikipedia.org/wiki/John_Glen_Wardrop" target="_blank">Wiki</a>. <a href="#fnref:wardrop" class="reversefootnote" role="doc-backlink">&#8617;</a></p> </li> <li id="fn:greenshield" role="doc-endnote"> <p>Early mathematical models of road performance by <a href="https://trid.trb.org/view/120649" target="_blank">BD Greenshield</a> were fundamental to Wardrop’s work. <a href="#fnref:greenshield" class="reversefootnote" role="doc-backlink">&#8617;</a></p> </li> </ol> </div>]]></content><author><name></name></author><category term="algorithms"/><category term="math"/><category term="traffic"/><summary type="html"><![CDATA[another famous network optimization problem]]></summary></entry><entry><title type="html">An introduction to Braess’ Paradox</title><link href="https://www.bowenwen.com/blog/2019/intro-braess-paradox/" rel="alternate" type="text/html" title="An introduction to Braess’ Paradox"/><published>2019-05-01T00:00:00+00:00</published><updated>2019-05-01T00:00:00+00:00</updated><id>https://www.bowenwen.com/blog/2019/intro-braess-paradox</id><content type="html" xml:base="https://www.bowenwen.com/blog/2019/intro-braess-paradox/"><![CDATA[<p><em>Tl’dr: Usually, additional roads improve congestion. However, in certain circumstances, more roads can lead to worse congestion. It is important to assess the impact of new infrastructure!</em></p> <p>I first learned about Braess’ Paradox in a third year transportation engineering class. It is a simple exercise to demonstrate the importance of evaluating the impact of infrastructural investments.</p> <h2 id="base-case-scenario">Base Case Scenario</h2> <h3 id="problem-definition">Problem Definition</h3> <p>Given there is 300 cars trying to travel from point A to point B, as shown below:</p> <p><img src="/assets/img/posts/network_braess_paradox_1.svg" alt="" width="300"/></p> <p>To help us in our calculation, let us assume the travel time on these road links are as follows, where t is travel time, and v is volume on the road (i.e., number of cars):</p> <ul> <li>for link 1 and 4:  \(t=1+0.02v\)</li> <li>for link 2 and 3:  \(t=6+0.01v\)</li> </ul> <p>There are two possible path connecting A and B:</p> <ul> <li>path x through link 1 and 2, via the top two links</li> <li>path y through link 3 and 4, via the bottom two links</li> </ul> <h3 id="solution">Solution</h3> <p>Without doing any calculations, we know the number of cars will be equally divided between path x and y because the two paths have exactly the same two types of links. We can confirm this by the calculations below:</p> <p>Let the travel times of the two options, \(t_1\) and \(t_2\), be equal (this is the condition for user equilibrium where you cannot “beat” the system by switching path), find volumes on the two path \(v1\) and \(v2\):</p> \[t_x = t_y \rightarrow t_1 + t_2 = t_3 + t_4\] \[v_1 = v_2 = v_x \text{ and } v_3 = v_4 = v_y\] \[1+0.02(v_x) + 6+0.01(v_x) = 1+0.02(v_y) + 6+0.01(v_y)\] \[\text{since}\, v_{total} = v_x + v_y\] \[7+0.03(v_{total}-v_y) = 7+0.03(v_y)\] \[v_y = 150\] \[\boxed{v_y = 150, v_x = 150, t_x = t_y = 11.5}\] <p>The travel time per car is 11.5 minutes; there are 150 cars on each path.</p> <h3 id="benefit-evaluation">Benefit Evaluation</h3> <p>In this example, let us evaluate “benefit” in terms of total network travel times. For simplicity, let us assume there are only 1 person per car</p> \[\boxed{tt_{network} = 11.5(300) = 3,450}\] <p>The total network travel time is 3,450 minutes or 2.40 days.</p> <h2 id="new-network-scenario">New Network Scenario</h2> <p>If you have get the gist of the calculation in the base case scenario, the next part is going to get more interesting. What if we add a new one way road in the middle of the network? Traditional wisdom would suggest that adding new roads will improve congestion–let’s see if that is true and by how much.</p> <h3 id="problem-definition-1">Problem Definition</h3> <p>Again, there are 300 cars trying to travel from point A to point B, as shown below, but now with an additional one-way road in the middle:</p> <p><img src="/assets/img/posts/network_braess_paradox_2.svg" alt="" width="300"/></p> <p>Here are a summary of the travel time functions:</p> <ul> <li>for link 1 and 4:  \(t=1+0.02v\)</li> <li>for link 2 and 3:  \(t=6+0.01v\)</li> <li>for link 5:  \(t=2+0.01v\)</li> </ul> <p>Since we added a new link, there are now 3 ways to travel across the network:</p> <ul> <li>path x through link 1 and 2, via the top two links</li> <li>path y through link 3 and 4, via the bottom two links</li> <li>path z through link 1, 5 and 4</li> </ul> <h3 id="solution-1">Solution</h3> <p>The additional path adds a new spin to solving this problem, but our assumptions are still the same. Using user equilibrium assumption, the travel times on all paths will be equal. Here are the summary of conditions:</p> \[t_x = t_y = t_z\] \[t_x = t_1 + t_2\] \[t_y = t_3 + t_4\] \[t_z = t_1 + t_4 + t_5\] \[300 = v_x + v_y + v_z\] <p>Applying the below conditions is where we need to be careful with the math. Because path z shares path with both path x and y, we have to make sure to add the volumes to the shared links on path z. We can ensure that this is accounted for by using volume on the links when solving for volumes:</p> \[v_1 = v_x + v_z\] \[v_2 = v_x\] \[v_3 = v_y\] \[v_4 = v_y + v_z\] \[v_5 = v_z\] \[300 = v_2 + v_3 + v_5\] <p>Let rearrange our equations and solve all the volumes first.</p> \[t_2 = t_3\] \[6 + 0.01v_2 + 1 + 0.02v_2 = 6 + 0.01v_3 + 1 + 0.02v_3\] \[v_2 = v_3\] \[300 = 2v_2 + v_5\] \[(300 - v_5)/2 = v_2\] <p>Now that we have almost all of the volume relationships between paths and links, we are very close to getting all of the volumes solved.</p> \[t_5 = t_3\] \[1 + 0.02v_1 + 1 + 0.02v_4 + 2 + 0.01v_5 = 6 + 0.01v_3 + 1 + 0.02v_4\] \[0.02(v_2+v_5) + 0.02(v_2+v_5) + 0.01v_5 = 3 + 0.01v_3 + 0.02(v_2+v_5)\] \[0.01v_2+ 0.03v_5 = 3\] \[0.01(300 - v_5)/2+ 0.03v_5 = 3\] \[0.025v_5 = 1.5\] \[v_5 = 60\] <p>So given our other conditions, here are our answers for link volumes and travel times:</p> \[\boxed{v_1 = 180, v_2 = 120, v_3 = 120, v_4 = 180, v_5 = 60}\] \[\boxed{t_1 = 4.6, t_2 = 7.2, t_3 = 7.2, t_4 = 4.6, t_5 = 1.6}\] <p>Finally, let’s add up respective link travel times to get path travel times.</p> \[\boxed{t_x = t_y = t_z = 11.8}\] <h3 id="benefit-evaluation-1">Benefit Evaluation</h3> \[\boxed{tt_{network} = 11.8(300) = 3,540}\] <p>The total network travel time is 3,540 minutes or 2.46 days.</p> <p>Our total network travel time has increased, indicating a worsening of congestion.</p> <h2 id="closing-remarks">Closing Remarks</h2> <p>So, what have we learned from this simple example of Braess’ Paradox? In simple terms, we cannot rely on our intuitions and rules of thumb in all cases. There are exceptions to the rule that building roads will resolve congestion and it is important for us to assess the impact of infrastructure on road performance.</p>]]></content><author><name></name></author><category term="algorithms"/><category term="math"/><category term="traffic"/><summary type="html"><![CDATA[a famous network optimization problem]]></summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://www.bowenwen.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.bowenwen.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-05-22T20:43:48+00:00</updated><id>https://www.bowenwen.com/feed.xml</id><title type="html">Bo Wen</title><subtitle>My journey into data science, advanced computing, and more.
+</subtitle><entry><title type="html">a post with giscus comments</title><link href="https://www.bowenwen.com/blog/2022/giscus-comments/" rel="alternate" type="text/html" title="a post with giscus comments" /><published>2022-12-10T15:59:00+00:00</published><updated>2022-12-10T15:59:00+00:00</updated><id>https://www.bowenwen.com/blog/2022/giscus-comments</id><content type="html" xml:base="https://www.bowenwen.com/blog/2022/giscus-comments/"><![CDATA[<p>This post shows how to add GISCUS comments.</p>]]></content><author><name></name></author><category term="sample-posts" /><category term="external-services" /><summary type="html"><![CDATA[an example of a blog post with giscus comments]]></summary></entry><entry><title type="html">Wardrop’s Principles</title><link href="https://www.bowenwen.com/blog/2019/wardrop/" rel="alternate" type="text/html" title="Wardrop’s Principles" /><published>2019-06-01T00:00:00+00:00</published><updated>2019-06-01T00:00:00+00:00</updated><id>https://www.bowenwen.com/blog/2019/wardrop</id><content type="html" xml:base="https://www.bowenwen.com/blog/2019/wardrop/"><![CDATA[<p>Wardrop’s first and second principles, named after English mathematician John Glen Wardrop <sup id="fnref:wardrop" role="doc-noteref"><a href="#fn:wardrop" class="footnote" rel="footnote">1</a></sup>, are pivotal to the understanding of user behavior in transportation systems. Wardrop’s principles enable the systematic analysis of transportation networks. It does this by elegantly linking road performance to system objectives.</p>
+
+<p>In the middle of the 20th century, transportation engineers and planners knew that an increased number of cars result in increased congestion–reduced speed and capacity. They were able to use accurate empirical relationships to model congestion thanks to BD Greenshield <sup id="fnref:greenshield" role="doc-noteref"><a href="#fn:greenshield" class="footnote" rel="footnote">2</a></sup>. They knew that given different route options, people would choose the one that took less time. But there was still an important piece of the puzzle missing. Wardrop formulated the math to quantitatively model route choice behavior.</p>
+
+<p>Under Wardrop’s first principle, users make choices to minimize travel times. This is also referred to as a “user equilibrium” condition. In the example network below, people living in the red and blue neighborhoods, at home location ‘o’, are travelling to work location ‘d’. Under user equilibrium, every user would choose the road with the lowest travel time, even if it resulted in congestion and increased travel time for everyone else.</p>
+
+<figure>
+  <img src="/assets/img/posts/wardrop-ue.svg" alt="user equilibrium condition" width="100%" />
+  <figcaption><b>Figure 1</b> User equilibrium–everyone uses the wide road, causing congestion.</figcaption>
+</figure>
+
+<p>In contrast, under Wardrop’s second principle, all users make decision to minimize the total network travel time, a “system optimal” condition. In this case, users would avoid congestion even if it results in higher travel time for themselves.</p>
+
+<figure>
+  <img src="/assets/img/posts/wardrop-so.svg" alt="system optimal condition" width="100%" />
+  <figcaption><b>Figure 2</b> System optimal–most people use the wide road, but a small number of people travel longer on small streets to avoid causing congestion on the wide road.</figcaption>
+</figure>
+
+<p>We will skip the calculations in this blog post, but the concept of Wardrop’s principles is very intuitive and has a wide range of application beyond transportation. In fact, the mathematical framework behind user equilibrium, i.e. Nash Equilibrium (or in other contexts, the tragedy of the commons), is deeply rooted in game theory.</p>
+
+<p>While in transportation planning we generally assume a user equilibrium network condition, we often experiment with different measures (such as road advisories, congestion charges, ramp metering, tolls) to encourage users to act in a manner that reduces congestion. Sometimes, these measures can be very political and wildly unpopular.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:wardrop" role="doc-endnote">
+      <p>Research by JG Wardrop on <a href="https://scholar.google.ca/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=JG+Wardrop&amp;btnG=&amp;oq=" target="_blank">Google Scholar</a>, and more on JG Wardrop on <a href="https://en.wikipedia.org/wiki/John_Glen_Wardrop" target="_blank">Wiki</a>. <a href="#fnref:wardrop" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:greenshield" role="doc-endnote">
+      <p>Early mathematical models of road performance by <a href="https://trid.trb.org/view/120649" target="_blank">BD Greenshield</a> were fundamental to Wardrop’s work. <a href="#fnref:greenshield" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="algorithms" /><category term="math" /><category term="traffic" /><summary type="html"><![CDATA[another famous network optimization problem]]></summary></entry><entry><title type="html">An introduction to Braess’ Paradox</title><link href="https://www.bowenwen.com/blog/2019/intro-braess-paradox/" rel="alternate" type="text/html" title="An introduction to Braess’ Paradox" /><published>2019-05-01T00:00:00+00:00</published><updated>2019-05-01T00:00:00+00:00</updated><id>https://www.bowenwen.com/blog/2019/intro-braess-paradox</id><content type="html" xml:base="https://www.bowenwen.com/blog/2019/intro-braess-paradox/"><![CDATA[<p><em>Tl’dr: Usually, additional roads improve congestion. However, in certain circumstances, more roads can lead to worse congestion. It is important to assess the impact of new infrastructure!</em></p>
+
+<p>I first learned about Braess’ Paradox in a third year transportation engineering class. It is a simple exercise to demonstrate the importance of evaluating the impact of infrastructural investments.</p>
+
+<h2 id="base-case-scenario">Base Case Scenario</h2>
+
+<h3 id="problem-definition">Problem Definition</h3>
+
+<p>Given there is 300 cars trying to travel from point A to point B, as shown below:</p>
+
+<p><img src="/assets/img/posts/network_braess_paradox_1.svg" alt="" width="300" /></p>
+
+<p>To help us in our calculation, let us assume the travel time on these road links are as follows, where t is travel time, and v is volume on the road (i.e., number of cars):</p>
+<ul>
+  <li>for link 1 and 4:  \(t=1+0.02v\)</li>
+  <li>for link 2 and 3:  \(t=6+0.01v\)</li>
+</ul>
+
+<p>There are two possible path connecting A and B:</p>
+<ul>
+  <li>path x through link 1 and 2, via the top two links</li>
+  <li>path y through link 3 and 4, via the bottom two links</li>
+</ul>
+
+<h3 id="solution">Solution</h3>
+
+<p>Without doing any calculations, we know the number of cars will be equally divided between path x and y because the two paths have exactly the same two types of links. We can confirm this by the calculations below:</p>
+
+<p>Let the travel times of the two options, \(t_1\) and \(t_2\), be equal (this is the condition for user equilibrium where you cannot “beat” the system by switching path), find volumes on the two path \(v1\) and \(v2\):</p>
+
+\[t_x = t_y \rightarrow t_1 + t_2 = t_3 + t_4\]
+
+\[v_1 = v_2 = v_x \text{ and } v_3 = v_4 = v_y\]
+
+\[1+0.02(v_x) + 6+0.01(v_x) = 1+0.02(v_y) + 6+0.01(v_y)\]
+
+\[\text{since}\, v_{total} = v_x + v_y\]
+
+\[7+0.03(v_{total}-v_y) = 7+0.03(v_y)\]
+
+\[v_y = 150\]
+
+\[\boxed{v_y = 150, v_x = 150, t_x = t_y = 11.5}\]
+
+<p>The travel time per car is 11.5 minutes; there are 150 cars on each path.</p>
+
+<h3 id="benefit-evaluation">Benefit Evaluation</h3>
+
+<p>In this example, let us evaluate “benefit” in terms of total network travel times. For simplicity, let us assume there are only 1 person per car</p>
+
+\[\boxed{tt_{network} = 11.5(300) = 3,450}\]
+
+<p>The total network travel time is 3,450 minutes or 2.40 days.</p>
+
+<h2 id="new-network-scenario">New Network Scenario</h2>
+
+<p>If you have get the gist of the calculation in the base case scenario, the next part is going to get more interesting. What if we add a new one way road in the middle of the network? Traditional wisdom would suggest that adding new roads will improve congestion–let’s see if that is true and by how much.</p>
+
+<h3 id="problem-definition-1">Problem Definition</h3>
+
+<p>Again, there are 300 cars trying to travel from point A to point B, as shown below, but now with an additional one-way road in the middle:</p>
+
+<p><img src="/assets/img/posts/network_braess_paradox_2.svg" alt="" width="300" /></p>
+
+<p>Here are a summary of the travel time functions:</p>
+<ul>
+  <li>for link 1 and 4:  \(t=1+0.02v\)</li>
+  <li>for link 2 and 3:  \(t=6+0.01v\)</li>
+  <li>for link 5:  \(t=2+0.01v\)</li>
+</ul>
+
+<p>Since we added a new link, there are now 3 ways to travel across the network:</p>
+<ul>
+  <li>path x through link 1 and 2, via the top two links</li>
+  <li>path y through link 3 and 4, via the bottom two links</li>
+  <li>path z through link 1, 5 and 4</li>
+</ul>
+
+<h3 id="solution-1">Solution</h3>
+
+<p>The additional path adds a new spin to solving this problem, but our assumptions are still the same. Using user equilibrium assumption, the travel times on all paths will be equal. Here are the summary of conditions:</p>
+
+\[t_x = t_y = t_z\]
+
+\[t_x = t_1 + t_2\]
+
+\[t_y = t_3 + t_4\]
+
+\[t_z = t_1 + t_4 + t_5\]
+
+\[300 = v_x + v_y + v_z\]
+
+<p>Applying the below conditions is where we need to be careful with the math. Because path z shares path with both path x and y, we have to make sure to add the volumes to the shared links on path z. We can ensure that this is accounted for by using volume on the links when solving for volumes:</p>
+
+\[v_1 = v_x + v_z\]
+
+\[v_2 = v_x\]
+
+\[v_3 = v_y\]
+
+\[v_4 = v_y + v_z\]
+
+\[v_5 = v_z\]
+
+\[300 = v_2 + v_3 + v_5\]
+
+<p>Let rearrange our equations and solve all the volumes first.</p>
+
+\[t_2 = t_3\]
+
+\[6 + 0.01v_2 + 1 + 0.02v_2 = 6 + 0.01v_3 + 1 + 0.02v_3\]
+
+\[v_2 = v_3\]
+
+\[300 = 2v_2 + v_5\]
+
+\[(300 - v_5)/2 = v_2\]
+
+<p>Now that we have almost all of the volume relationships between paths and links, we are very close to getting all of the volumes solved.</p>
+
+\[t_5 = t_3\]
+
+\[1 + 0.02v_1 + 1 + 0.02v_4 + 2 + 0.01v_5 = 6 + 0.01v_3 + 1 + 0.02v_4\]
+
+\[0.02(v_2+v_5) + 0.02(v_2+v_5) + 0.01v_5 = 3 + 0.01v_3 + 0.02(v_2+v_5)\]
+
+\[0.01v_2+ 0.03v_5 = 3\]
+
+\[0.01(300 - v_5)/2+ 0.03v_5 = 3\]
+
+\[0.025v_5 = 1.5\]
+
+\[v_5 = 60\]
+
+<p>So given our other conditions, here are our answers for link volumes and travel times:</p>
+
+\[\boxed{v_1 = 180, v_2 = 120, v_3 = 120, v_4 = 180, v_5 = 60}\]
+
+\[\boxed{t_1 = 4.6, t_2 = 7.2, t_3 = 7.2, t_4 = 4.6, t_5 = 1.6}\]
+
+<p>Finally, let’s add up respective link travel times to get path travel times.</p>
+
+\[\boxed{t_x = t_y = t_z = 11.8}\]
+
+<h3 id="benefit-evaluation-1">Benefit Evaluation</h3>
+
+\[\boxed{tt_{network} = 11.8(300) = 3,540}\]
+
+<p>The total network travel time is 3,540 minutes or 2.46 days.</p>
+
+<p>Our total network travel time has increased, indicating a worsening of congestion.</p>
+
+<h2 id="closing-remarks">Closing Remarks</h2>
+
+<p>So, what have we learned from this simple example of Braess’ Paradox? In simple terms, we cannot rely on our intuitions and rules of thumb in all cases. There are exceptions to the rule that building roads will resolve congestion and it is important for us to assess the impact of infrastructure on road performance.</p>]]></content><author><name></name></author><category term="algorithms" /><category term="math" /><category term="traffic" /><summary type="html"><![CDATA[a famous network optimization problem]]></summary></entry><entry><title type="html">a post with disqus comments</title><link href="https://www.bowenwen.com/blog/2015/disqus-comments/" rel="alternate" type="text/html" title="a post with disqus comments" /><published>2015-10-20T15:59:00+00:00</published><updated>2015-10-20T15:59:00+00:00</updated><id>https://www.bowenwen.com/blog/2015/disqus-comments</id><content type="html" xml:base="https://www.bowenwen.com/blog/2015/disqus-comments/"><![CDATA[<p>This post shows how to add DISQUS comments.</p>]]></content><author><name></name></author><category term="sample-posts" /><category term="external-services" /><summary type="html"><![CDATA[an example of a blog post with disqus comments]]></summary></entry></feed>

@@ -1,99 +1,97 @@
-- title: 
+- title: General Information
   type: map
   contents:
-    - name: Summary
-      value: I am passionate about solving complex problems using data. I have built data-driven software using statistical and machine learning models in Python, R and C# to investigate research questions and address business needs. In my spare time, I enjoy hiking and building websites on my Raspberry Pi.
-    - name: Location
-      value: Vancouver, BC, Canada
+    - name: Full Name
+      value: Albert Einstein
+    - name: Date of Birth
+      value: 14th March 1879
     - name: Languages
-      value: English, Mandarin
-
-- title: Experience
-  type: time_table
-  contents:
-    - title: Senior Modeler
-      institution: TransLink (South Coast British Columbia Transportation Authority)
-      year: 06/2020 - now
-      description:
-        - development of an activity-based travel demand model
-        - evaluated the impacts of the pandemic on the transportation network
-        - estimated linear regression and discrete choice models for travel demand
-        - won the Grand prize at TransLink's 2020 hackathon for a passenger load prediction system
-
-    - title: Modeler
-      institution: TransLink (South Coast British Columbia Transportation Authority)
-      year: 06/2018 - 06/2020
-      description:
-        - evaluated consumer benefit and cost of infrastructural investments
-        - processed travel survey data to reduce sampling bias
-        - created analytics tools to report findings to stakeholders
-
-    - title: Data Scientist
-      institution: IBI Group Inc. (now Arcadis)
-      year: 07/2017 - 06/2018
-      description:
-        - built a data mining application in Python that aggregated land use data to inform development proposals
-        - produced statistical and machine learning models using SQL and Python to evaluate industrial control systems
-
-- title: Appointments
-  type: time_table
-  contents:
-    - title: Committee Member of AI and Advanced Computing Committee (AED50)
-      institution: Transportation Research Board NASEM
-      year: 05/2020 - now
-      description: 
-      - assisted with subcommittee activities such as development of the Machine Learning Primer
-      - conducted peer review of over a dozen papers, and coordinated the review of paper submission for the annual meetings
+      value: English, German
 
 - title: Education
   type: time_table
   contents:
-    - title: Master of Applied Science
-      institution: University of Toronto, Canada
-      year: 09/2015 - 07/2017
+    - title: PhD
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1905
       description:
-        - Thesis - <a href="https://tspace.library.utoronto.ca/handle/1807/79147">Data-driven mesoscopic simulation of large-scale surface transit networks</a>
-        - Alexander Graham Bell Canada Graduate Scholarship (NSERC CGS-M)
-
-    - title: Bachelor of Applied Science
-      institution: University of Toronto, Canada
-      year: 09/2010 - 07/2015
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Federal teaching diploma
+      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
+      year: 1900
       description:
-        - Thesis - Reinforcement learning-based adaptive traffic signal control system for transit
+        - Description 1.
+        - Description 2.
 
-- title: Skills & Interests
+- title: Experience
+  type: time_table
+  contents:
+    - title: Professor of Theoretical Physics
+      institution: Institute for Advanced Study, Princeton University
+      year: 1933 - 1955
+      description:
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Visiting Professor
+      institution: California Institute of Technology, Pasadena, California, US
+      year: 1933
+      description:
+        - Description 1.
+        - Description 2.
+
+    - title: Director
+      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
+      year: 1917-1933
+
+    - title: Professor of Theoretical Physics
+      institution: Karl-Ferdinand University, Prague, Czechoslovakia
+      year: 1911 - 1917
+      description:
+
+    - title: Associate Professor of Theoretical Physics
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1909 - 1911
+
+- title: Open Source Projects
+  type: time_table
+  contents:
+    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
+      year: 2015-now
+      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 1921
+      items: 
+        - Nobel Prize in Physics 
+        - Matteucci Medal
+    - year: 2029
+      items: 
+        - Max Planck Medal
+
+- title: Academic Interests
   type: nested_list
   contents:
-    - title: <u>Programming Skills:</u> 
+    - title: Topic 1.
+      items: 
+        - Description 1.
+        - Description 2.
+    - title: Topic 2.
       items:
-        - <i>Advanced</i> - Python, R, SQL, Git; 
-        - <i>Intermediate</i> - Docker, C#, Ruby on Rails
-    - title: <u>Certifications:</u>
-      items:
-        - <a href="https://www.coursera.org/account/accomplishments/verify/UC582DECL5CM">CD and DevOps from UVa</a>
-        - <a href="https://www.coursera.org/account/accomplishments/verify/NVUPN5M4EKDC">Project Planning & Mgmt from UVa</a>
-        - <a href="https://courses.edx.org/certificates/95241032e09d4b54837ee3104c988521">Discrete Choice Models from EPFL</a>
-        - <a href="https://www.coursera.org/account/accomplishments/verify/QQMDH38ZQ99H">Applied Plotting in Python from UMich</a>
-        - <a href="https://www.coursera.org/account/accomplishments/verify/93A74QDG6YUY">Data Science in Python from UMich</a>
-        - <a href="https://www.coursera.org/account/accomplishments/verify/8YKRHW4F8T3Q">Machine Learning from Stanford</a>
-    - title: <u>Interests:</u> 
-      items:
-        - self-hosted server, hiking, traveling
+        - Description 1.
+        - Description 2.
 
-
-# - title: Academic Interests
-#   type: nested_list
-#   contents:
-#     - title: Topic 1.
-#       items: 
-#         - Description 1.
-#         - Description 2.
-#     - title: Topic 2.
-#       items:
-#         - Description 1.
-#         - Description 2.
-
-# - title: Other Interests
-#   type: list
-#   contents:
-#     - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+- title: Other Interests
+  type: list
+  contents:
+    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
